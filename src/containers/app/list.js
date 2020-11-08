@@ -5,9 +5,9 @@ import { newBlog } from "../../redux/actions/blog";
 
 const Posts = (props) => {
 
-  console.log("props", props.blog);
+  console.log("props", props);
 
-  const List = props.blog.blog.map(
+  const List = props.blog.posts.map(
     (post) => {
         return (
         <ListGroup.Item key={post.id} className='rounded-0'>
@@ -15,6 +15,9 @@ const Posts = (props) => {
         <Row className='mt-3'>
             <Col md={12}>
                 {post.title}
+            </Col>
+            <Col md={12}>
+                {post.content}
             </Col>
         </Row>
 

@@ -4,7 +4,7 @@ import { BLOG } from '../types';
 //init
 
 const INIT_STATE = {
-    blog:[{
+    posts:[{
         id: Math.random(10),
         title: 'Bai viet 1',
         content: 'test bai viet'
