@@ -13,10 +13,4 @@ function App(props) {
 }
 
 
-// const con = (mapStateToProps, mapDispatchToProp) => 
-//   return (App) => {
-//     <App mapStateToProps mapDispatchToProp/>
-//   }
-// }
-
 export default App;

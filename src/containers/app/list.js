@@ -1,56 +1,69 @@
-import { ListGroup } from "react-bootstrap";
-import { Row, Col } from "react-bootstrap";
-import { connect } from "react-redux";
-import { newBlog } from "../../redux/actions/blog";
+import React, { useState } from "react";
+import { Table, Button } from "react-bootstrap";
+import EditModal from "../../views/posts/editPost";
 
 const Posts = (props) => {
+  const [show, setShow] = useState(false);
+  const [detail, setDetail] = useState({});
 
-  console.log("props", props);
+  const onShow = (record = {}) => {
+    setShow(!show);
 
-  const List = props.blog.posts.map(
-    (post) => {
-        return (
-        <ListGroup.Item key={post.id} className='rounded-0'>
-
-        <Row className='mt-3'>
-            <Col md={12}>
-                {post.title}
-            </Col>
-            <Col md={12}>
-                {post.content}
-            </Col>
-        </Row>
-
-        
-    </ListGroup.Item>)
-
-    }
-);
-
-
+    setDetail(record);
+  };
 
   return (
-    <ListGroup>
-      <p> This is List</p>
-      {List}
-    </ListGroup>
+    <React.Fragment>
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {props.blog.posts &&
+            props.blog.posts.map((post) => {
+              return (
+                <tr key={post.id}>
+                  <td>{post.title}</td>
+                  <td>{post.content}</td>
+                  <td>
+                    <ul className="list-inline">
+                      <li className="list-inline-item">
+                        <Button
+                          variant="secondary"
+                          size="sm"
+                          onClick={() => onShow(post)}
+                        >
+                          Edit
+                        </Button>
+                      </li>
+                      <li className="list-inline-item">
+                        <Button
+                          variant="danger"
+                          size="sm"
+                          onClick={() => props.removePost(post.id)}
+                        >
+                          Remove
+                        </Button>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+              );
+            })}
+        </tbody>
+      </Table>
+      <EditModal
+        show={show}
+        detail={detail}
+        onClose={onShow}
+        onEditPost={props.onEditPost}
+      />
+    </React.Fragment>
   );
 };
 
-
-
-
-
-function mapStateToProps(state) {
-  return {
-    blog: state.blog,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    newBlog: (state) => dispatch(newBlog(state)),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Posts);
+export default Posts;

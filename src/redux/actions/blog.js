@@ -8,3 +8,20 @@ export const newBlog = blog => {
         }
     }
 }
+
+export const removePost = id => {
+    return {
+        type: BLOG.REMOVE_POST,
+        payload: {
+            id
+        }
+    }
+}
+
+
+export const editPost = payload => {
+    return {
+        type: BLOG.EDIT_POST,
+        payload
+    }
+}

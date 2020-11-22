@@ -1,3 +1,5 @@
 export const BLOG = {
-    POST: 'POST'
+    POST: 'POST',
+    REMOVE_POST: 'REMOVE_POST',
+    EDIT_POST: 'EDIT_POST'
 }
