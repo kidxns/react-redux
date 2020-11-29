@@ -2,9 +2,11 @@ import { combineReducers } from 'redux';
 
 //blogReducer
 import blog from './blog';
+import serviceApi from './serviceApi';
 
 const allReducers = {
-    blog
+    blog,
+    serviceApi
 }
 
 const rootReducers = combineReducers(allReducers)
